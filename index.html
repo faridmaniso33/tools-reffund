@@ -49,6 +49,30 @@
       filter: invert(0.8) sepia(1) saturate(5) hue-rotate(280deg);
       cursor: pointer;
     }
+    /* Custom Range Slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 9999px;
+      outline: none;
+      background: #27273d;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #db2777;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 10px rgba(219, 39, 119, 0.6);
+      transition: transform 0.1s ease-in-out;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
   </style>
 </head>
 <body class="bg-peony-dark text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-peony-500 selection:text-white">
@@ -131,7 +155,7 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="text-xs font-semibold text-slate-300 block mb-1.5">Durasi (Hari)</label>
               <input type="number" id="totalDays" value="30" min="1" 
@@ -142,10 +166,22 @@
               <input type="number" id="totalPrice" placeholder="30000" 
                 class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
             </div>
-            <div>
-              <label class="text-xs font-semibold text-slate-300 block mb-1.5">Potongan Admin (Rp)</label>
-              <input type="number" id="adminFee" value="0" min="0" placeholder="0" 
-                class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+          </div>
+
+          <!-- Rate Refund Slider Bar -->
+          <div class="p-3.5 bg-peony-dark/60 rounded-xl border border-peony-border space-y-2">
+            <div class="flex justify-between items-center text-xs font-semibold">
+              <span class="text-rose-300 font-bold flex items-center gap-1.5">
+                <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Rate Refund:
+              </span>
+              <span id="rateLabel" class="text-peony-400 font-extrabold text-sm font-mono">0.7</span>
+            </div>
+            <input type="range" id="rateSlider" min="0.1" max="1.0" step="0.1" value="0.7" 
+              class="w-full cursor-pointer accent-peony-600" oninput="updateRateDisplay(this.value)">
+            <div class="flex justify-between text-[10px] text-slate-500 font-medium">
+              <span>0.1 (10%)</span>
+              <span>0.5 (50%)</span>
+              <span>1.0 (Full 100%)</span>
             </div>
           </div>
 
@@ -196,8 +232,8 @@
                   <span id="ratePerDayText" class="font-bold">-</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Potongan Admin:</span>
-                  <span id="adminFeeText" class="font-bold text-rose-400">-</span>
+                  <span class="text-slate-400">Rate Pengembalian:</span>
+                  <span id="appliedRateText" class="font-bold text-rose-400">-</span>
                 </div>
               </div>
             </div>
@@ -283,9 +319,7 @@
         <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 mb-2">
           <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
         </div>
-        <div id="calendarDays" class="grid grid-cols-7 gap-1 text-center text-xs">
-          <!-- Calendar dynamic grid -->
-        </div>
+        <div id="calendarDays" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
       </div>
     </section>
 
@@ -299,12 +333,10 @@
   </footer>
 
   <script>
-    // Format Rupiah
     function formatRp(num) {
       return 'Rp ' + Math.max(0, Math.round(num)).toLocaleString('id-ID');
     }
 
-    // Set Default Dates to Today
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('startDate').value = today;
     document.getElementById('endDate').value = today;
@@ -312,7 +344,10 @@
     document.getElementById('diffEnd').value = today;
     document.getElementById('addBaseDate').value = today;
 
-    // Switch Tabs
+    function updateRateDisplay(val) {
+      document.getElementById('rateLabel').innerText = parseFloat(val).toFixed(1);
+    }
+
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('bg-peony-600', 'text-white', 'shadow-md');
@@ -339,10 +374,10 @@
       const endDateVal = document.getElementById('endDate').value;
       const totalDays = parseInt(document.getElementById('totalDays').value) || 30;
       const totalPrice = parseFloat(document.getElementById('totalPrice').value) || 0;
-      const adminFee = parseFloat(document.getElementById('adminFee').value) || 0;
+      const rateRefund = parseFloat(document.getElementById('rateSlider').value) || 0.7;
 
       if (!startDateVal || !endDateVal) {
-        alert("Silakan lengkapi tanggal beli dan tanggal berhenti.");
+        alert("Silakan pilih tanggal beli dan tanggal klaim.");
         return;
       }
 
@@ -356,13 +391,12 @@
         return;
       }
 
-      // If same date, count as 0 or 1 day
       usedDays = Math.min(usedDays, totalDays);
       const remainingDays = Math.max(0, totalDays - usedDays);
       const ratePerDay = totalDays > 0 ? totalPrice / totalDays : 0;
       
-      const rawRefund = (remainingDays * ratePerDay) - adminFee;
-      const finalRefund = Math.max(0, rawRefund);
+      // Rumus: Sisa Hari * Tarif Harian * Rate Refund
+      const finalRefund = Math.round(remainingDays * ratePerDay * rateRefund);
       const usagePercent = Math.min(100, Math.round((usedDays / totalDays) * 100));
 
       // Update UI
@@ -370,7 +404,7 @@
       document.getElementById('usedDaysText').innerText = `${usedDays} Hari`;
       document.getElementById('remainingDaysText').innerText = `${remainingDays} Hari`;
       document.getElementById('ratePerDayText').innerText = formatRp(ratePerDay) + ' / hari';
-      document.getElementById('adminFeeText').innerText = formatRp(adminFee);
+      document.getElementById('appliedRateText').innerText = `${rateRefund.toFixed(1)} (${Math.round(rateRefund * 100)}%)`;
       document.getElementById('usagePercentText').innerText = `${usagePercent}%`;
       document.getElementById('usageProgressBar').style.width = `${usagePercent}%`;
 
@@ -391,7 +425,7 @@
         usedDays,
         remainingDays,
         totalPrice,
-        adminFee,
+        rateRefund,
         finalRefund
       };
     }
@@ -399,15 +433,16 @@
     function resetRefundForm() {
       document.getElementById('appName').value = '';
       document.getElementById('totalPrice').value = '';
-      document.getElementById('adminFee').value = '0';
       document.getElementById('totalDays').value = '30';
+      document.getElementById('rateSlider').value = '0.7';
+      updateRateDisplay(0.7);
       document.getElementById('startDate').value = today;
       document.getElementById('endDate').value = today;
       document.getElementById('refundAmountText').innerText = 'Rp 0';
       document.getElementById('usedDaysText').innerText = '-';
       document.getElementById('remainingDaysText').innerText = '-';
       document.getElementById('ratePerDayText').innerText = '-';
-      document.getElementById('adminFeeText').innerText = '-';
+      document.getElementById('appliedRateText').innerText = '-';
       document.getElementById('usagePercentText').innerText = '0%';
       document.getElementById('usageProgressBar').style.width = '0%';
       lastRefundData = null;
@@ -429,8 +464,8 @@
 • *Total Durasi:* ${d.totalDays} Hari
 • *Hari Terpakai:* ${d.usedDays} Hari
 • *Sisa Garansi:* ${d.remainingDays} Hari
-• *Harga Produk:* ${formatRp(d.totalPrice)}
-• *Biaya Admin:* ${formatRp(d.adminFee)}
+• *Harga Beli:* ${formatRp(d.totalPrice)}
+• *Rate Refund:* ${d.rateRefund.toFixed(1)} (${Math.round(d.rateRefund * 100)}%)
 ━━━━━━━━━━━━━━━━━━
 💰 *TOTAL REFUND:* ${formatRp(d.finalRefund)}
 ━━━━━━━━━━━━━━━━━━
