@@ -12,7 +12,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -22,17 +22,12 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            peony: {
-              50: '#fdf2f8',
-              100: '#fce7f3',
-              400: '#f472b6',
-              500: '#ec4899',
-              600: '#db2777',
-              700: '#be185d',
-              dark: '#0e0e15',
-              card: '#161622',
-              cardHover: '#1c1c2b',
-              border: '#27273d'
+            bright: {
+              pink: '#ec4899',
+              yellow: '#eab308',
+              green: '#10b981',
+              card: '#ffffff',
+              border: '#fbcfe8'
             }
           }
         }
@@ -40,209 +35,229 @@
     }
   </script>
   <style>
-    .glass {
-      background: rgba(22, 22, 34, 0.75);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    body {
+      background: radial-gradient(circle at 10% 20%, #fdf4ff 0%, #fffbeb 40%, #ecfdf5 90%);
+      min-height: 100vh;
     }
-    input[type="date"]::-webkit-calendar-picker-indicator {
-      filter: invert(0.8) sepia(1) saturate(5) hue-rotate(280deg);
-      cursor: pointer;
+    .glass-light {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .gradient-hero-btn {
+      background: linear-gradient(135deg, #ec4899 0%, #f59e0b 50%, #10b981 100%);
+    }
+    .gradient-hero-btn:hover {
+      background: linear-gradient(135deg, #db2777 0%, #d97706 50%, #059669 100%);
+    }
+    .gradient-badge {
+      background: linear-gradient(135deg, #fdf2f8 0%, #fefce8 50%, #ecfdf5 100%);
     }
     /* Custom Range Slider */
     input[type="range"] {
       -webkit-appearance: none;
       appearance: none;
-      height: 8px;
+      height: 9px;
       border-radius: 9999px;
       outline: none;
-      background: #27273d;
+      background: linear-gradient(90deg, #ec4899 0%, #eab308 50%, #10b981 100%);
     }
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      background: #db2777;
+      background: #ffffff;
       cursor: pointer;
-      border: 2px solid #ffffff;
-      box-shadow: 0 0 10px rgba(219, 39, 119, 0.6);
-      transition: transform 0.1s ease-in-out;
+      border: 3px solid #ec4899;
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.4);
+      transition: transform 0.15s ease-in-out;
     }
     input[type="range"]::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
+      transform: scale(1.2);
     }
   </style>
 </head>
-<body class="bg-peony-dark text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-peony-500 selection:text-white">
+<body class="text-slate-800 font-sans min-h-screen flex flex-col antialiased selection:bg-pink-400 selection:text-white">
 
   <!-- Header / Navbar -->
-  <header class="sticky top-0 z-30 glass border-b border-peony-border px-4 lg:px-8 py-3.5">
+  <header class="sticky top-0 z-30 glass-light border-b border-pink-200/70 px-4 lg:px-8 py-3 shadow-sm">
     <div class="max-w-5xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-peony-600 to-violet-600 flex items-center justify-center shadow-lg shadow-peony-600/20">
-          <i data-lucide="calculator" class="w-5 h-5 text-white"></i>
+        <!-- Logo Image -->
+        <div class="relative p-0.5 rounded-2xl bg-gradient-to-tr from-pink-500 via-amber-400 to-emerald-400 shadow-md shadow-pink-500/20">
+          <img 
+            src="https://cdn.phototourl.com/free/2026-08-17-e52b5acc-dae1-4844-9634-3241e4a6a56b.jpg" 
+            alt="Peony Logo" 
+            class="w-11 h-11 rounded-[14px] object-cover bg-white"
+          />
         </div>
         <div>
-          <h1 class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-rose-300 to-violet-400">PEONY TOOLS</h1>
-          <p class="text-[11px] text-slate-400 -mt-1 font-medium">Digital App Refund Calculator</p>
+          <h1 class="text-xl sm:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-amber-500 to-emerald-600">PEONY TOOLS</h1>
+          <p class="text-[11px] text-slate-500 font-semibold -mt-0.5">Digital App Refund & Date Calculator</p>
         </div>
       </div>
-      <div class="hidden sm:flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full bg-peony-card border border-peony-border text-rose-300">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span>Akurat & Otomatis</span>
+      
+      <div class="hidden sm:flex items-center gap-2 text-xs font-bold px-3.5 py-1.5 rounded-full border border-pink-200 bg-white/90 text-slate-700 shadow-sm">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-emerald-600">Akurat & Terpercaya</span>
       </div>
     </div>
   </header>
 
   <!-- Navigation Tabs -->
   <div class="max-w-5xl mx-auto px-4 mt-6 w-full">
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-peony-card rounded-2xl border border-peony-border" id="navTabs">
-      <button onclick="switchTab('refund')" id="tab-refund" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 bg-peony-600 text-white shadow-md">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-white/90 rounded-2xl border border-pink-200/80 shadow-md shadow-pink-500/5" id="navTabs">
+      <button onclick="switchTab('refund')" id="tab-refund" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-2 gradient-hero-btn text-white shadow-md shadow-pink-500/25">
         <i data-lucide="receipt-refund" class="w-4 h-4"></i>
         <span>Kalkulator Refund</span>
       </button>
-      <button onclick="switchTab('hari')" id="tab-hari" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-peony-cardHover transition flex items-center justify-center gap-2">
+      <button onclick="switchTab('hari')" id="tab-hari" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center justify-center gap-2">
         <i data-lucide="hourglass" class="w-4 h-4"></i>
         <span>Hitung Hari</span>
       </button>
-      <button onclick="switchTab('tanggal')" id="tab-tanggal" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-peony-cardHover transition flex items-center justify-center gap-2">
+      <button onclick="switchTab('tanggal')" id="tab-tanggal" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center justify-center gap-2">
         <i data-lucide="calendar-plus" class="w-4 h-4"></i>
         <span>Penanggalan</span>
       </button>
-      <button onclick="switchTab('kalender')" id="tab-kalender" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-peony-cardHover transition flex items-center justify-center gap-2">
+      <button onclick="switchTab('kalender')" id="tab-kalender" class="tab-btn py-2.5 px-3 rounded-xl text-xs font-bold text-slate-600 hover:text-pink-600 hover:bg-pink-50 transition flex items-center justify-center gap-2">
         <i data-lucide="calendar" class="w-4 h-4"></i>
         <span>Kalender</span>
       </button>
     </div>
   </div>
 
-  <!-- Content Container -->
+  <!-- Main Container -->
   <main class="flex-1 max-w-5xl mx-auto px-4 py-6 w-full">
 
     <!-- 1. TAB: KALKULATOR REFUND -->
     <section id="view-refund" class="tab-content block">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- Input Form (7 cols) -->
-        <div class="lg:col-span-7 bg-peony-card border border-peony-border rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
-          <div class="border-b border-peony-border pb-3 flex items-center justify-between">
-            <h2 class="text-base font-bold text-white flex items-center gap-2">
-              <i data-lucide="edit-3" class="w-4 h-4 text-peony-400"></i>
+        <!-- Form Input -->
+        <div class="lg:col-span-7 bg-white/95 border border-pink-200 rounded-3xl p-6 shadow-xl shadow-pink-500/5 space-y-4">
+          <div class="border-b border-pink-100 pb-3.5 flex items-center justify-between">
+            <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+              <span class="p-1.5 rounded-lg bg-pink-100 text-pink-600"><i data-lucide="edit-3" class="w-4 h-4"></i></span>
               Formulir Refund Aplikasi
             </h2>
-            <button onclick="resetRefundForm()" class="text-xs text-slate-400 hover:text-rose-400 flex items-center gap-1 transition">
+            <button onclick="resetRefundForm()" class="text-xs font-bold text-slate-400 hover:text-pink-600 flex items-center gap-1 transition">
               <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset
             </button>
           </div>
 
           <div>
-            <label class="text-xs font-semibold text-slate-300 block mb-1.5">Nama Aplikasi / Layanan</label>
+            <label class="text-xs font-bold text-slate-700 block mb-1.5">Nama Aplikasi / Layanan</label>
             <input type="text" id="appName" placeholder="Contoh: Netflix Premium 1 Bulan" 
-              class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+              class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 focus:bg-white text-slate-800 transition">
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tanggal Beli / Mulai</label>
+              <label class="text-xs font-bold text-slate-700 block mb-1.5">Tanggal Beli / Mulai</label>
               <input type="date" id="startDate" 
-                class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+                class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 focus:bg-white text-slate-800 transition">
             </div>
             <div>
-              <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tanggal Berhenti / Klaim</label>
+              <label class="text-xs font-bold text-slate-700 block mb-1.5">Tanggal Berhenti / Klaim</label>
               <input type="date" id="endDate" 
-                class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+                class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 focus:bg-white text-slate-800 transition">
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="text-xs font-semibold text-slate-300 block mb-1.5">Durasi (Hari)</label>
+              <label class="text-xs font-bold text-slate-700 block mb-1.5">Durasi Total (Hari)</label>
               <input type="number" id="totalDays" value="30" min="1" 
-                class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+                class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 focus:bg-white text-slate-800 transition">
             </div>
             <div>
-              <label class="text-xs font-semibold text-slate-300 block mb-1.5">Harga Beli (Rp)</label>
+              <label class="text-xs font-bold text-slate-700 block mb-1.5">Harga Beli (Rp)</label>
               <input type="number" id="totalPrice" placeholder="30000" 
-                class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+                class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 focus:bg-white text-slate-800 transition">
             </div>
           </div>
 
-          <!-- Rate Refund Slider Bar -->
-          <div class="p-3.5 bg-peony-dark/60 rounded-xl border border-peony-border space-y-2">
-            <div class="flex justify-between items-center text-xs font-semibold">
-              <span class="text-rose-300 font-bold flex items-center gap-1.5">
-                <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Rate Refund:
+          <!-- Slider Rate Refund -->
+          <div class="p-4 bg-gradient-to-r from-pink-50 via-amber-50 to-emerald-50 rounded-2xl border border-pink-200 space-y-2">
+            <div class="flex justify-between items-center text-xs font-bold">
+              <span class="text-pink-700 flex items-center gap-1.5 font-extrabold">
+                <i data-lucide="sliders" class="w-4 h-4 text-pink-500"></i> Rate Refund:
               </span>
-              <span id="rateLabel" class="text-peony-400 font-extrabold text-sm font-mono">0.7</span>
+              <span id="rateLabel" class="text-pink-600 font-black text-base font-mono bg-white px-2.5 py-0.5 rounded-lg border border-pink-200 shadow-sm">0.7</span>
             </div>
             <input type="range" id="rateSlider" min="0.1" max="1.0" step="0.1" value="0.7" 
-              class="w-full cursor-pointer accent-peony-600" oninput="updateRateDisplay(this.value)">
-            <div class="flex justify-between text-[10px] text-slate-500 font-medium">
+              class="w-full cursor-pointer" oninput="updateRateDisplay(this.value)">
+            <div class="flex justify-between text-[11px] text-slate-500 font-bold">
               <span>0.1 (10%)</span>
               <span>0.5 (50%)</span>
               <span>1.0 (Full 100%)</span>
             </div>
           </div>
 
-          <button onclick="calculateRefund()" class="w-full py-3 bg-gradient-to-r from-peony-600 to-rose-600 hover:from-peony-700 hover:to-rose-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-peony-600/30 transition">
-            <i data-lucide="calculator" class="w-4 h-4"></i>
+          <button onclick="calculateRefund()" class="w-full py-3.5 gradient-hero-btn text-white font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-pink-500/25 transition transform active:scale-95">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
             <span>Hitung Nominal Refund</span>
           </button>
         </div>
 
-        <!-- Result Box (5 cols) -->
+        <!-- Result Box -->
         <div class="lg:col-span-5 flex flex-col gap-4">
-          <div class="bg-peony-card border border-peony-border rounded-2xl p-5 sm:p-6 shadow-xl flex-1 flex flex-col justify-between">
+          <div class="bg-white/95 border border-pink-200 rounded-3xl p-6 shadow-xl shadow-pink-500/5 flex-1 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-bold uppercase tracking-wider text-peony-400">HASIL REFUND</span>
-                <span id="refundBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Belum dihitung</span>
+                <span class="text-xs font-black uppercase tracking-wider text-pink-600">HASIL REFUND</span>
+                <span id="refundBadge" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 border border-slate-200">Belum dihitung</span>
               </div>
 
-              <!-- Main Amount -->
-              <div class="text-center py-4 bg-peony-dark/80 rounded-2xl border border-peony-border mb-5">
-                <p class="text-xs text-slate-400">Total Pengembalian Dana</p>
-                <h3 id="refundAmountText" class="text-3xl font-extrabold text-white mt-1 bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-pink-300">Rp 0</h3>
+              <!-- Big Result -->
+              <div class="text-center py-5 bg-gradient-to-br from-pink-50 via-amber-50 to-emerald-50 rounded-2xl border border-pink-200/80 mb-5">
+                <p class="text-xs font-bold text-slate-500">Total Pengembalian Dana</p>
+                <h3 id="refundAmountText" class="text-3xl sm:text-4xl font-black mt-1 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-amber-500 to-emerald-600">Rp 0</h3>
               </div>
 
               <!-- Progress Bar -->
               <div class="space-y-1.5 mb-5">
-                <div class="flex justify-between text-xs font-semibold">
-                  <span class="text-slate-400">Pemakaian Hari:</span>
-                  <span id="usagePercentText" class="text-peony-400 font-bold">0%</span>
+                <div class="flex justify-between text-xs font-bold">
+                  <span class="text-slate-600">Pemakaian Hari:</span>
+                  <span id="usagePercentText" class="text-pink-600 font-extrabold">0%</span>
                 </div>
-                <div class="w-full h-2.5 bg-peony-dark rounded-full overflow-hidden border border-peony-border">
-                  <div id="usageProgressBar" class="h-full bg-gradient-to-r from-rose-500 to-peony-500 transition-all duration-500 w-0"></div>
+                <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-pink-100">
+                  <div id="usageProgressBar" class="h-full bg-gradient-to-r from-pink-500 via-amber-400 to-emerald-400 transition-all duration-500 w-0"></div>
                 </div>
               </div>
 
               <!-- Details Breakdown -->
-              <div class="space-y-2 text-xs border-t border-peony-border pt-4 text-slate-300">
+              <div class="space-y-2 text-xs border-t border-pink-100 pt-4 text-slate-700 font-medium">
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Hari Terpakai:</span>
-                  <span id="usedDaysText" class="font-bold">-</span>
+                  <span class="text-slate-500">Hari Terpakai:</span>
+                  <span id="usedDaysText" class="font-bold text-slate-800">-</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Sisa Garansi / Hari:</span>
-                  <span id="remainingDaysText" class="font-bold text-emerald-400">-</span>
+                  <span class="text-slate-500">Sisa Garansi / Hari:</span>
+                  <span id="remainingDaysText" class="font-extrabold text-emerald-600">-</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Tarif Per Hari:</span>
-                  <span id="ratePerDayText" class="font-bold">-</span>
+                  <span class="text-slate-500">Tarif Per Hari:</span>
+                  <span id="ratePerDayText" class="font-bold text-slate-800">-</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-slate-400">Rate Pengembalian:</span>
-                  <span id="appliedRateText" class="font-bold text-rose-400">-</span>
+                  <span class="text-slate-500">Rate Pengembalian:</span>
+                  <span id="appliedRateText" class="font-bold text-pink-600">-</span>
                 </div>
               </div>
             </div>
 
-            <!-- Action Button -->
-            <div class="mt-5 pt-3">
-              <button onclick="copyRefundText()" id="btnCopy" class="w-full py-2.5 bg-peony-dark hover:bg-peony-cardHover border border-peony-border text-slate-200 text-xs font-bold rounded-xl flex items-center justify-center gap-2 transition">
-                <i data-lucide="copy" class="w-4 h-4"></i>
-                <span id="btnCopyText">Salin Format WhatsApp</span>
+            <!-- Action Buttons (WhatsApp & Telegram) -->
+            <div class="mt-6 pt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button onclick="copyRefundText('wa')" id="btnCopyWA" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-700 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm">
+                <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+                <span id="btnCopyWAText">Salin WhatsApp</span>
+              </button>
+              
+              <button onclick="copyRefundText('tg')" id="btnCopyTG" class="w-full py-2.5 bg-sky-50 hover:bg-sky-100 border border-sky-300 text-sky-700 text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm">
+                <i data-lucide="send" class="w-4 h-4 text-sky-600"></i>
+                <span id="btnCopyTGText">Salin Telegram</span>
               </button>
             </div>
           </div>
@@ -252,83 +267,90 @@
 
     <!-- 2. TAB: HITUNG SELISIH HARI -->
     <section id="view-hari" class="tab-content hidden">
-      <div class="max-w-xl mx-auto bg-peony-card border border-peony-border rounded-2xl p-6 shadow-xl space-y-5">
-        <h2 class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="hourglass" class="w-4 h-4 text-peony-400"></i>
+      <div class="max-w-xl mx-auto bg-white/95 border border-pink-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-pink-500/5 space-y-5">
+        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+          <span class="p-1.5 rounded-lg bg-amber-100 text-amber-600"><i data-lucide="hourglass" class="w-4 h-4"></i></span>
           Hitung Selisih Dua Tanggal
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tanggal Awal</label>
-            <input type="date" id="diffStart" class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+            <label class="text-xs font-bold text-slate-700 block mb-1.5">Tanggal Awal</label>
+            <input type="date" id="diffStart" class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 text-slate-800">
           </div>
           <div>
-            <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tanggal Akhir</label>
-            <input type="date" id="diffEnd" class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+            <label class="text-xs font-bold text-slate-700 block mb-1.5">Tanggal Akhir</label>
+            <input type="date" id="diffEnd" class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 text-slate-800">
           </div>
         </div>
-        <button onclick="calculateDiffDays()" class="w-full py-3 bg-peony-600 hover:bg-peony-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition">
+        <button onclick="calculateDiffDays()" class="w-full py-3.5 gradient-hero-btn text-white font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-pink-500/20 transition">
           <i data-lucide="calculator" class="w-4 h-4"></i> Hitung Hari
         </button>
 
-        <div id="diffResultBox" class="hidden text-center py-5 bg-peony-dark rounded-xl border border-peony-border">
-          <p class="text-xs text-slate-400">Selisih Durasi</p>
-          <p id="diffResultDays" class="text-3xl font-extrabold text-rose-300 mt-1">0 Hari</p>
+        <div id="diffResultBox" class="hidden text-center py-5 bg-gradient-to-br from-pink-50 to-amber-50 rounded-2xl border border-pink-200">
+          <p class="text-xs font-bold text-slate-500">Selisih Durasi</p>
+          <p id="diffResultDays" class="text-3xl font-black text-pink-600 mt-1">0 Hari</p>
         </div>
       </div>
     </section>
 
     <!-- 3. TAB: PENANGGALAN (JATUH TEMPO) -->
     <section id="view-tanggal" class="tab-content hidden">
-      <div class="max-w-xl mx-auto bg-peony-card border border-peony-border rounded-2xl p-6 shadow-xl space-y-5">
-        <h2 class="text-base font-bold text-white flex items-center gap-2">
-          <i data-lucide="calendar-plus" class="w-4 h-4 text-peony-400"></i>
-          Penanggalan (Hitung Tanggal Jatuh Tempo)
+      <div class="max-w-xl mx-auto bg-white/95 border border-pink-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-pink-500/5 space-y-5">
+        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+          <span class="p-1.5 rounded-lg bg-emerald-100 text-emerald-600"><i data-lucide="calendar-plus" class="w-4 h-4"></i></span>
+          Penanggalan (Hitung Jatuh Tempo)
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tanggal Mulai</label>
-            <input type="date" id="addBaseDate" class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+            <label class="text-xs font-bold text-slate-700 block mb-1.5">Tanggal Mulai</label>
+            <input type="date" id="addBaseDate" class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 text-slate-800">
           </div>
           <div>
-            <label class="text-xs font-semibold text-slate-300 block mb-1.5">Tambah Durasi (Hari)</label>
-            <input type="number" id="addDaysCount" value="30" class="w-full px-3.5 py-2.5 bg-peony-dark border border-peony-border rounded-xl text-sm focus:outline-none focus:border-peony-500 text-slate-200">
+            <label class="text-xs font-bold text-slate-700 block mb-1.5">Tambah Durasi (Hari)</label>
+            <input type="number" id="addDaysCount" value="30" class="w-full px-4 py-2.5 bg-pink-50/40 border border-pink-200 rounded-xl text-sm focus:outline-none focus:border-pink-500 text-slate-800">
           </div>
         </div>
-        <button onclick="calculateDueDate()" class="w-full py-3 bg-peony-600 hover:bg-peony-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition">
+        <button onclick="calculateDueDate()" class="w-full py-3.5 gradient-hero-btn text-white font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-pink-500/20 transition">
           <i data-lucide="calendar-check" class="w-4 h-4"></i> Hitung Tanggal Berakhir
         </button>
 
-        <div id="dueDateResultBox" class="hidden text-center py-5 bg-peony-dark rounded-xl border border-peony-border">
-          <p class="text-xs text-slate-400">Tanggal Jatuh Tempo / Expired</p>
-          <p id="dueDateResultText" class="text-2xl font-extrabold text-rose-300 mt-1">-</p>
+        <div id="dueDateResultBox" class="hidden text-center py-5 bg-gradient-to-br from-pink-50 to-emerald-50 rounded-2xl border border-pink-200">
+          <p class="text-xs font-bold text-slate-500">Tanggal Jatuh Tempo / Expired</p>
+          <p id="dueDateResultText" class="text-2xl font-black text-emerald-600 mt-1">-</p>
         </div>
       </div>
     </section>
 
     <!-- 4. TAB: KALENDER -->
     <section id="view-kalender" class="tab-content hidden">
-      <div class="max-w-md mx-auto bg-peony-card border border-peony-border rounded-2xl p-6 shadow-xl">
+      <div class="max-w-md mx-auto bg-white/95 border border-pink-200 rounded-3xl p-6 shadow-xl shadow-pink-500/5">
         <div class="flex items-center justify-between mb-4">
-          <h2 id="calendarMonthYear" class="text-base font-bold text-white">Bulan Tahun</h2>
+          <h2 id="calendarMonthYear" class="text-base font-extrabold text-slate-800">Bulan Tahun</h2>
           <div class="flex gap-1.5">
-            <button onclick="changeMonth(-1)" class="p-2 rounded-lg bg-peony-dark border border-peony-border hover:text-peony-400"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
-            <button onclick="changeMonth(1)" class="p-2 rounded-lg bg-peony-dark border border-peony-border hover:text-peony-400"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+            <button onclick="changeMonth(-1)" class="p-2 rounded-xl bg-pink-50 border border-pink-200 hover:bg-pink-100 text-pink-600"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <button onclick="changeMonth(1)" class="p-2 rounded-xl bg-pink-50 border border-pink-200 hover:bg-pink-100 text-pink-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
           </div>
         </div>
-        <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-slate-400 mb-2">
-          <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+        <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-slate-500 mb-2">
+          <span class="text-rose-500">Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
         </div>
-        <div id="calendarDays" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
+        <div id="calendarDays" class="grid grid-cols-7 gap-1 text-center text-xs font-semibold"></div>
       </div>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-peony-border py-5 text-center text-xs text-slate-500 mt-auto bg-peony-card/30">
-    <div class="max-w-5xl mx-auto px-4">
-      <p>&copy; 2026 Web ini dibuat oleh <strong class="text-slate-300">Peony Digital Store</strong>.</p>
+  <footer class="border-t border-pink-200/70 py-5 text-center text-xs text-slate-500 mt-auto bg-white/70">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>&copy; 2026 Web ini dibuat oleh <strong class="bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-emerald-600 font-extrabold">Peony Digital Store</strong>.</p>
+      <div class="flex gap-3 text-[11px] font-bold text-slate-400">
+        <span class="text-pink-500">Pink</span>
+        <span>•</span>
+        <span class="text-amber-500">Kuning</span>
+        <span>•</span>
+        <span class="text-emerald-500">Hijau</span>
+      </div>
     </div>
   </footer>
 
@@ -350,16 +372,16 @@
 
     function switchTab(tabId) {
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-peony-600', 'text-white', 'shadow-md');
-        btn.classList.add('text-slate-400', 'hover:text-white', 'hover:bg-peony-cardHover');
+        btn.classList.remove('gradient-hero-btn', 'text-white', 'shadow-md', 'shadow-pink-500/25');
+        btn.classList.add('text-slate-600', 'hover:text-pink-600', 'hover:bg-pink-50');
       });
       document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
 
       const activeBtn = document.getElementById(`tab-${tabId}`);
       const activeContent = document.getElementById(`view-${tabId}`);
       if (activeBtn && activeContent) {
-        activeBtn.classList.add('bg-peony-600', 'text-white', 'shadow-md');
-        activeBtn.classList.remove('text-slate-400', 'hover:text-white', 'hover:bg-peony-cardHover');
+        activeBtn.classList.add('gradient-hero-btn', 'text-white', 'shadow-md', 'shadow-pink-500/25');
+        activeBtn.classList.remove('text-slate-600', 'hover:text-pink-600', 'hover:bg-pink-50');
         activeContent.classList.remove('hidden');
       }
       lucide.createIcons();
@@ -395,7 +417,7 @@
       const remainingDays = Math.max(0, totalDays - usedDays);
       const ratePerDay = totalDays > 0 ? totalPrice / totalDays : 0;
       
-      // Rumus: Sisa Hari * Tarif Harian * Rate Refund
+      // Rumus Prorata: Sisa Hari * Tarif Harian * Rate Refund
       const finalRefund = Math.round(remainingDays * ratePerDay * rateRefund);
       const usagePercent = Math.min(100, Math.round((usedDays / totalDays) * 100));
 
@@ -410,10 +432,10 @@
 
       const badge = document.getElementById('refundBadge');
       if (remainingDays === 0) {
-        badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30";
+        badge.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-red-100 text-red-600 border border-red-200";
         badge.innerText = "Masa Aktif Habis";
       } else {
-        badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+        badge.className = "text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200";
         badge.innerText = "Tersedia Refund";
       }
 
@@ -448,14 +470,18 @@
       lastRefundData = null;
     }
 
-    function copyRefundText() {
+    function copyRefundText(platform = 'wa') {
       if (!lastRefundData) {
         calculateRefund();
       }
       const d = lastRefundData;
       if (!d) return;
 
-      const text = 
+      let text = '';
+
+      if (platform === 'wa') {
+        // Format WhatsApp
+        text = 
 `🧾 *RINCIAN REFUND — PEONY STORE*
 ━━━━━━━━━━━━━━━━━━
 • *Layanan:* ${d.appName}
@@ -471,13 +497,40 @@
 ━━━━━━━━━━━━━━━━━━
 _Terima kasih telah bertransaksi di Peony Store._`;
 
-      navigator.clipboard.writeText(text).then(() => {
-        const btnText = document.getElementById('btnCopyText');
-        btnText.innerText = "Tersalin ke Clipboard!";
-        setTimeout(() => {
-          btnText.innerText = "Salin Format WhatsApp";
-        }, 2000);
-      });
+        navigator.clipboard.writeText(text).then(() => {
+          const btnText = document.getElementById('btnCopyWAText');
+          btnText.innerText = "Tersalin (WA)!";
+          setTimeout(() => {
+            btnText.innerText = "Salin WhatsApp";
+          }, 2000);
+        });
+
+      } else if (platform === 'tg') {
+        // Format Telegram Markdown
+        text = 
+`**RINCIAN REFUND — PEONY STORE**
+──────────────────────
+**Layanan:** ${d.appName}
+**Tgl Beli:** \`${d.startDateVal}\`
+**Tgl Klaim:** \`${d.endDateVal}\`
+**Total Durasi:** \`${d.totalDays} Hari\`
+**Hari Terpakai:** \`${d.usedDays} Hari\`
+**Sisa Garansi:** \`${d.remainingDays} Hari\`
+**Harga Beli:** \`${formatRp(d.totalPrice)}\`
+**Rate Refund:** \`${d.rateRefund.toFixed(1)} (${Math.round(d.rateRefund * 100)}%)\`
+──────────────────────
+**TOTAL REFUND:** \`${formatRp(d.finalRefund)}\`
+──────────────────────
+> _Terima kasih telah bertransaksi di Peony Store._`;
+
+        navigator.clipboard.writeText(text).then(() => {
+          const btnText = document.getElementById('btnCopyTGText');
+          btnText.innerText = "Tersalin (Telegram)!";
+          setTimeout(() => {
+            btnText.innerText = "Salin Telegram";
+          }, 2000);
+        });
+      }
     }
 
     // --- HITUNG HARI LOGIC ---
@@ -518,7 +571,7 @@ _Terima kasih telah bertransaksi di Peony Store._`;
       container.innerHTML = '';
 
       for (let i = 0; i < firstDayIndex; i++) {
-        container.innerHTML += `<div class="p-2 text-slate-700"></div>`;
+        container.innerHTML += `<div class="p-2 text-slate-300"></div>`;
       }
 
       const isCurrentMonth = new Date().getMonth() === month && new Date().getFullYear() === year;
@@ -527,7 +580,7 @@ _Terima kasih telah bertransaksi di Peony Store._`;
       for (let day = 1; day <= lastDay; day++) {
         const isToday = isCurrentMonth && day === todayDate;
         container.innerHTML += `
-          <div class="p-2.5 rounded-xl transition ${isToday ? 'bg-peony-600 text-white font-bold shadow-md' : 'hover:bg-peony-cardHover text-slate-300'}">
+          <div class="p-2.5 rounded-xl transition ${isToday ? 'gradient-hero-btn text-white font-extrabold shadow-md' : 'hover:bg-pink-100/60 text-slate-700'}">
             ${day}
           </div>
         `;
